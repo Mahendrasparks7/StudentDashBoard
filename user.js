@@ -1,27 +1,37 @@
 async function displayData() {
-    let res=await fetch("http://localhost:3000/student")
     try {
-        if(!res.ok){
+        let res = await fetch("https://studentdashboard-z477.onrender.com/student");
+
+        if (!res.ok) {
             throw new Error("Data Not Getting");
-            
         }
-        let data=await res.json();
-        showdata(data)
+
+        let data = await res.json();
+        showdata(data);
+
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
-let container=document.getElementById("container")
-function showdata(data){
+
+let container = document.getElementById("container");
+
+function showdata(data) {
+    container.innerHTML = "";
+
     data.forEach(ele => {
-        let item=document.createElement("div")
-        item.innerHTML=`
-        <div class="card">
-            <img src="${ele.image}">
-            <p><strong>Name :</strong> ${ele.name}</p>
-        </div>
-        `
-        container.appendChild(item)
+
+        let item = document.createElement("div");
+
+        item.innerHTML = `
+            <div class="card">
+                <img src="${ele.image}" alt="${ele.name}">
+                <p><strong>Name :</strong> ${ele.name}</p>
+            </div>
+        `;
+
+        container.appendChild(item);
     });
 }
-addEventListener("DOMContentLoaded", displayData)
+
+window.addEventListener("DOMContentLoaded", displayData);
