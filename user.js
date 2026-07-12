@@ -15,7 +15,7 @@ async function displayData() {
     }
 }
 
-let container = document.getElementById("container");
+let container = document.getElementById("students");
 
 function showdata(data) {
     container.innerHTML = "";

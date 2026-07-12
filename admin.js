@@ -1,11 +1,10 @@
 const API_URL = "https://studentdashboard-z477.onrender.com/student";
 
-
+// Fetch Students
 async function fetchData() {
-
-    let res = await fetch(API_URL);
-
     try {
+        let res = await fetch(API_URL);
+
         if (!res.ok) {
             throw new Error("Data not fetching");
         }
@@ -14,211 +13,136 @@ async function fetchData() {
         showdata(data);
 
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 }
 
-
+// Display Students
 function showdata(data) {
 
-    let container = document.getElementById("container");
+    let container = document.getElementById("studentContainer");
+
     container.innerHTML = "";
 
-    let item = document.createElement("div");
+    data.forEach((student) => {
 
-    item.innerHTML = data.map((student) => {
+        let card = document.createElement("div");
+        card.className = "card";
 
-        return `
-        <div class="card">
-
+        card.innerHTML = `
             <p><strong>Id :</strong> ${student.id}</p>
             <p><strong>Name :</strong> ${student.name}</p>
 
-            <button class="deleteBtn" id="delete${student.id}">
-                Delete
-            </button>
-
-            <button class="editBtn" id="edit${student.id}">
-                Edit
-            </button>
-
-        </div>
+            <button class="deleteBtn">Delete</button>
+            <button class="editBtn">Edit</button>
         `;
 
-    }).join("");
-
-
-    container.appendChild(item);
-
-
-    data.forEach(student => {
-
-        let deletebtn = document.getElementById(`delete${student.id}`);
-        let editbtn = document.getElementById(`edit${student.id}`);
-
-
-        deletebtn.onclick = () => {
+        card.querySelector(".deleteBtn").addEventListener("click", () => {
             deleteData(student.id);
-        };
+        });
 
-
-        editbtn.onclick = () => {
+        card.querySelector(".editBtn").addEventListener("click", () => {
             editData(student.id);
-        };
+        });
 
+        container.appendChild(card);
     });
-
 }
-
-
 
 // Delete Student
 async function deleteData(id) {
 
-
-    let res = await fetch(`${API_URL}/${id}`, {
-
-        method: "DELETE"
-
-    });
-
-
     try {
+
+        let res = await fetch(`${API_URL}/${id}`, {
+            method: "DELETE"
+        });
 
         if (!res.ok) {
             throw new Error("Data Not Deleted");
         }
 
-
         alert("Data Deleted Successfully");
 
         fetchData();
 
-
     } catch (error) {
-
-        console.log(error);
-
+        console.error(error);
     }
-
 }
-
-
 
 // Edit Student
 async function editData(id) {
 
-
-    let studentId = document.getElementById("id");
-    let stName = document.getElementById("name");
-    let image = document.getElementById("image");
-
-
-    let res = await fetch(`${API_URL}/${id}`);
-
-
     try {
 
+        let res = await fetch(`${API_URL}/${id}`);
 
         if (!res.ok) {
             throw new Error("Data not getting");
         }
 
-
         let data = await res.json();
 
-
-        studentId.value = data.id;
-        stName.value = data.name;
-        image.value = data.image;
-
+        document.getElementById("id").value = data.id;
+        document.getElementById("name").value = data.name;
+        document.getElementById("image").value = data.image;
 
     } catch (error) {
-
-        console.log(error);
-
+        console.error(error);
     }
-
 }
-
-
 
 // Add / Update Student
 async function savedata() {
-
 
     let studentId = document.getElementById("id").value;
     let name = document.getElementById("name").value;
     let image = document.getElementById("image").value;
 
-
     let obj = {
-
-        name: name,
-        image: image
-
+        name,
+        image
     };
-
 
     let method = studentId ? "PUT" : "POST";
 
-
-    let URL = studentId
+    let url = studentId
         ? `${API_URL}/${studentId}`
         : API_URL;
 
-
-
-    let res = await fetch(URL, {
-
-
-        method: method,
-
-
-        headers: {
-
-            "Content-Type": "application/json"
-
-        },
-
-
-        body: JSON.stringify(obj)
-
-
-    });
-
-
-
     try {
 
+        let res = await fetch(url, {
+
+            method: method,
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify(obj)
+
+        });
 
         if (!res.ok) {
-
             throw new Error("Data Not Saved");
-
         }
 
-
-        alert(studentId 
-            ? "Data Updated Successfully" 
+        alert(studentId
+            ? "Data Updated Successfully"
             : "Data Added Successfully"
         );
-
 
         document.getElementById("id").value = "";
         document.getElementById("name").value = "";
         document.getElementById("image").value = "";
 
-
         fetchData();
 
-
-
-    } catch(error) {
-
-        console.log(error);
-
+    } catch (error) {
+        console.error(error);
     }
-
 }
+
 window.addEventListener("DOMContentLoaded", fetchData);
