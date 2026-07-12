@@ -1,0 +1,35 @@
+{
+  "student": [
+    {
+      "name": "Sandeep",
+      "image": "https://i.pinimg.com/236x/0b/ec/ba/0becba73fa1afe6c40ecc3e99c302c27.jpg",
+      "id": "1"
+    },
+    {
+      "id": "2",
+      "name": "Abhisek",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlkBz3xUXNCYKpghZR40UGbHVZCXe7fk3kp_mWZK03Rw&s=10"
+    },
+    {
+      "name": "Narendra",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaAgJRn2YmCR4Oc86ZGw1RxIPInih51KLXly0_hpyApZncetwGvO-xc7Ao&s=10",
+      "id": "3"
+    },
+    {
+      "name": "Anudeep",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQD5mPGNIRxo8Xji3Or1jg0kskgchMAYJeW0qAMsNhTzQ&s=10",
+      "id": "4"
+    },
+    {
+      "id": "5",
+      "name": "Kaushik",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdB9B3EjNC_jv4mU5X5Be0wTkYxQZ3cd1VezgO3Z_Y0g&s=10"
+    },
+    {
+      "name": "Ramana",
+      "image": "https://wallpaperaccess.com/full/1226651.jpg",
+      "id": "6"
+    }
+
+  ]
+}
