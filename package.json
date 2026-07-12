@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Mahendrasparks7/StudentDashBoard#readme",
   "dependencies": {
+    "express": "^5.2.1",
     "json-server": "^1.0.0-beta.15"
   }
 }
