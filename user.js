@@ -1,3 +1,4 @@
+console.log("user.js loaded successfully");
 async function displayData() {
     try {
         let res = await fetch("https://studentdashboard-z477.onrender.com/student");
